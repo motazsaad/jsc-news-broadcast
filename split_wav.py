@@ -5,7 +5,7 @@ from pydub import silence
 import glob
 
 
-wav_list = sorted(glob.glob(os.path.join('./wav/new/', '*.wav')))
+wav_list = sorted(glob.glob(os.path.join('./wav/', '*.wav')))
 for wav_file in wav_list:
     wav_seg = AudioSegment.from_wav(wav_file)
     chunks = silence.split_on_silence(wav_seg, min_silence_len=400,
