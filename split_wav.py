@@ -7,14 +7,19 @@ import glob
 
 wav_list = sorted(glob.glob(os.path.join('./wav/', '*.wav')))
 for wav_file in wav_list:
+    print('processing', wav_file)
     wav_seg = AudioSegment.from_wav(wav_file)
     chunks = silence.split_on_silence(wav_seg, min_silence_len=400,
                                       silence_thresh=-24, keep_silence=300)
+    if not chunks:
+        chunks = silence.split_on_silence(wav_seg)
+    print('number of chuncks:{}'.format(len(chunks)))
     base_name, ext = os.path.basename(wav_file).split('.')
-    os.mkdir('./wav_split/' + base_name)
+    if not os.path.exists('./wav_split/' + base_name):
+        os.mkdir('./wav_split/' + base_name)
     for i, chunk in enumerate(chunks):
         out_file = "./wav_split/{}/{}_{}.wav".format(base_name, base_name, str(i).zfill(2))
-        print("exporting", out_file)
+        #print("exporting", out_file)
         chunk.export(out_file, format="wav")
 
 
