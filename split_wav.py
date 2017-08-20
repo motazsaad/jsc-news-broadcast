@@ -11,8 +11,6 @@ for wav_file in wav_list:
     wav_seg = AudioSegment.from_wav(wav_file)
     chunks = silence.split_on_silence(wav_seg, min_silence_len=400,
                                       silence_thresh=-24, keep_silence=300)
-    if not chunks:
-        chunks = silence.split_on_silence(wav_seg)
     print('number of chuncks:{}'.format(len(chunks)))
     base_name, ext = os.path.basename(wav_file).split('.')
     if not os.path.exists('./wav_split/' + base_name):
