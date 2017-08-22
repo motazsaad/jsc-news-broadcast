@@ -39,3 +39,14 @@ for f in *.wav ; do printf " (%s)\n" "${f}"; done > ../../headlines_10pm_19_4_20
 
 cat headlines*.transcription > jsc_test.transcription
 cat jsc_test.transcription | cut -d "(" -f2 | cut -d ")" -f1 | sed 's/\.wav//' > jsc_test.fileids
+
+
+
+
+#############################
+
+
+
+mkdir -p jsc_wav 
+find wav_split/ -name "*.wav" -exec cp "{}" jsc_wav/ \;
+
