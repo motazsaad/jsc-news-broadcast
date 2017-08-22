@@ -31,3 +31,11 @@ cd ..
 cd headlines_10pm_19_4_2016
 for f in *.wav ; do printf " (%s)\n" "${f}"; done > ../../headlines_10pm_19_4_2016.transcription
 
+
+
+
+
+######################
+
+cat headlines*.transcription > jsc_test.transcription
+cat jsc_test.transcription | cut -d "(" -f2 | cut -d ")" -f1 | sed 's/\.wav//' > jsc_test.fileids
